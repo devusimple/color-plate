@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30+ Color Palettes — 60-30-10 Rule</title>
+    <link href="https://api.fontsource.org/v1/fonts/inter/css.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f13;
+            color: #e0e0e6;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 1.05rem;
+            color: #8888a0;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #9999b0;
+        }
+
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.dom { background: #888; }
+        .legend-dot.sec { background: #555; }
+        .legend-dot.acc { background: #ff6b6b; }
+
+        /* Generator Section */
+        .generator-section {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(96, 165, 250, 0.1));
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            border-radius: 24px;
+            padding: 36px;
+        }
+
+        .generator-section h2 {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #e0e0e6;
+        }
+
+        .generator-section > p {
+            text-align: center;
+            color: #8888a0;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+
+        .generator-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .gen-btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gen-btn-primary {
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            color: #fff;
+        }
+
+        .gen-btn-primary:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 24px rgba(167, 139, 250, 0.3);
+        }
+
+        .gen-btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .gen-btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: #9999b0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gen-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .gen-btn-secondary.active-harmony {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: rgba(167, 139, 250, 0.3);
+            color: #a78bfa;
+        }
+
+        .harmony-selector {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .harmony-btn {
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.04);
+            color: #888;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .harmony-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .harmony-btn.active {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: rgba(167, 139, 250, 0.3);
+            color: #a78bfa;
+        }
+
+        .generated-palettes {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .generated-palette {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            animation: slideIn 0.4s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .generated-palette:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .gen-preview {
+            display: flex;
+            height: 60px;
+            flex: 1;
+        }
+
+        .gen-preview div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 700;
+            transition: filter 0.2s ease;
+        }
+
+        .gen-preview div:hover {
+            filter: brightness(1.2);
+        }
+
+        .gen-preview .g-dom { width: 60%; }
+        .gen-preview .g-sec { width: 30%; }
+        .gen-preview .g-acc { width: 10%; }
+
+        .gen-info {
+            display: flex;
+            gap: 12px;
+            padding: 12px 16px;
+            align-items: center;
+        }
+
+        .gen-hex-btn {
+            padding: 6px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #ccc;
+            font-size: 0.75rem;
+            font-family: 'Inter', monospace;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            min-width: 70px;
+        }
+
+        .gen-hex-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .gen-hex-btn .role {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gen-add-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: rgba(52, 211, 153, 0.1);
+            color: #34d399;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+        }
+
+        .gen-add-btn:hover {
+            background: rgba(52, 211, 153, 0.2);
+        }
+
+        .gen-add-btn.added {
+            background: rgba(52, 211, 153, 0.15);
+            border-color: rgba(52, 211, 153, 0.3);
+            color: #6ee7b7;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .palette-card {
+            background: #18181f;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .palette-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .palette-preview {
+            display: flex;
+            height: 140px;
+            position: relative;
+        }
+
+        .palette-preview .color-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: filter 0.3s ease;
+        }
+
+        .color-section:hover {
+            filter: brightness(1.15);
+        }
+
+        .dominant { width: 60%; }
+        .secondary { width: 30%; }
+        .accent { width: 10%; }
+
+        .palette-info {
+            padding: 24px;
+        }
+
+        .palette-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .palette-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.08);
+            color: #aaa;
+        }
+
+        .color-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .color-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            transition: background 0.2s ease;
+            cursor: pointer;
+        }
+
+        .color-row:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .color-swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-label {
+            flex: 1;
+        }
+
+        .color-label .role {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #777;
+            margin-bottom: 2px;
+        }
+
+        .color-label .hex {
+            font-size: 0.92rem;
+            font-weight: 600;
+            font-family: 'Inter', monospace;
+            color: #ccc;
+        }
+
+        .color-percent {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #888;
+        }
+
+        .preview-section {
+            margin-top: 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .preview-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+            color: #ccc;
+        }
+
+        .preview-section > p {
+            text-align: center;
+            color: #777;
+            margin-bottom: 40px;
+        }
+
+        .demo-card {
+            background: #18181f;
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            max-width: 700px;
+            margin: 0 auto;
+            transition: background 0.4s ease;
+        }
+
+        .demo-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .demo-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .demo-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .demo-subtitle {
+            font-size: 0.85rem;
+            margin-top: 4px;
+            opacity: 0.7;
+        }
+
+        .demo-bar {
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .demo-bar-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .demo-text {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            opacity: 0.85;
+            margin-bottom: 24px;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .demo-btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.15s ease, filter 0.15s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .demo-btn:hover {
+            transform: scale(1.04);
+        }
+
+        .palette-selector {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .palette-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .palette-btn:hover {
+            transform: scale(1.15);
+        }
+
+        .palette-btn.active {
+            border-color: #fff;
+            transform: scale(1.15);
+        }
+
+        .copied-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #2a2a3a;
+            color: #e0e0e6;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transition: transform 0.35s ease, opacity 0.35s ease;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .copied-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Guide Section */
+        .guide-section {
+            max-width: 1000px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+
+        .guide-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .guide-section > p {
+            text-align: center;
+            color: #8888a0;
+            margin-bottom: 50px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .guide-rule-visual {
+            display: flex;
+            height: 60px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rule-dom {
+            width: 60%;
+            background: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #e2e8f0;
+        }
+
+        .rule-sec {
+            width: 30%;
+            background: #475569;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .rule-acc {
+            width: 10%;
+            background: #f97316;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+        .guide-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .guide-card {
+            background: #18181f;
+            border-radius: 16px;
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: border-color 0.3s ease;
+        }
+
+        .guide-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .guide-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .guide-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .guide-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .guide-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .guide-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.9rem;
+            color: #9999b0;
+            line-height: 1.5;
+        }
+
+        .guide-card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .guide-card.dom-card li::before { background: #475569; }
+        .guide-card.sec-card li::before { background: #64748b; }
+        .guide-card.acc-card li::before { background: #f97316; }
+
+        .guide-component-map {
+            background: #18181f;
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 50px;
+        }
+
+        .guide-component-map h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .guide-component-map > p {
+            color: #8888a0;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .mock-browser {
+            background: #0f0f13;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .mock-topbar {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .mock-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mock-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .mock-url {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.7rem;
+            color: #555;
+            margin-left: 8px;
+        }
+
+        .mock-body {
+            padding: 24px;
+        }
+
+        .mock-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .mock-logo {
+            font-weight: 800;
+            font-size: 1rem;
+            color: #475569;
+        }
+
+        .mock-nav-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        .mock-nav-link {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .mock-nav-link.active-link {
+            color: #f97316;
+            font-weight: 600;
+        }
+
+        .mock-hero {
+            text-align: center;
+            padding: 24px 0;
+            margin-bottom: 24px;
+        }
+
+        .mock-hero h4 {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+
+        .mock-hero p {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .mock-hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .mock-btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: none;
+        }
+
+        .mock-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .mock-mini-card {
+            background: #18181f;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .mock-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+        }
+
+        .mock-mini-card .label {
+            font-size: 0.65rem;
+            color: #94a3b8;
+        }
+
+        .mock-mini-card .value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 6px;
+        }
+
+        .mock-bar-container {
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 8px;
+        }
+
+        .mock-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .guide-labels {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .guide-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #9999b0;
+        }
+
+        .guide-label-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 4px;
+        }
+
+        .guide-tips {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: #18181f;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            gap: 16px;
+        }
+
+        .tip-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .tip-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .tip-card p {
+            font-size: 0.82rem;
+            color: #8888a0;
+            line-height: 1.5;
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 18px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #9999b0;
+            border: 1px solid transparent;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-btn.active {
+            background: rgba(167, 139, 250, 0.2);
+            color: #a78bfa;
+            border-color: rgba(167, 139, 250, 0.3);
+        }
+
+        .gen-empty {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .gen-empty span {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .guide-columns {
+                grid-template-columns: 1fr;
+            }
+            .guide-tips {
+                grid-template-columns: 1fr;
+            }
+            .mock-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .gen-info {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .gen-hex-btn {
+                min-width: auto;
+                padding: 4px 6px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .palette-preview {
+                height: 100px;
+            }
+            .mock-nav-links {
+                display: none;
+            }
+            .generator-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>30+ Color Palettes</h1>
+        <p>Each palette follows the classic 60-30-10 design rule for harmonious visual composition. Click any color to copy its hex code.</p>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot dom"></div> 60% Dominant</div>
+            <div class="legend-item"><div class="legend-dot sec"></div> 30% Secondary</div>
+            <div class="legend-item"><div class="legend-dot acc"></div> 10% Accent</div>
+        </div>
+    </div>
+
+    <!-- Generator Section -->
+    <div class="generator-section">
+        <h2>🎲 Random Palette Generator</h2>
+        <p>Generate harmonious color palettes instantly using color theory rules</p>
+
+        <div class="harmony-selector">
+            <button class="harmony-btn active" data-harmony="all">Any</button>
+            <button class="harmony-btn" data-harmony="analogous">Analogous</button>
+            <button class="harmony-btn" data-harmony="complementary">Complementary</button>
+            <button class="harmony-btn" data-harmony="triadic">Triadic</button>
+            <button class="harmony-btn" data-harmony="split">Split-Comp</button>
+        </div>
+
+        <div class="generator-controls">
+            <button class="gen-btn gen-btn-primary" onclick="generateRandomPalettes()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                Generate 3 Palettes
+            </button>
+            <button class="gen-btn gen-btn-secondary" onclick="clearGenerated()">Clear All</button>
+        </div>
+
+        <div class="generated-palettes" id="generatedPalettes">
+            <div class="gen-empty">
+                <span>🎨</span>
+                Click "Generate" to create random color palettes
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-bar" id="filterBar"></div>
+    <div class="grid" id="paletteGrid"></div>
+
+    <div class="preview-section">
+        <h2>Live Preview</h2>
+        <p>Select a palette below to see it applied to a UI component</p>
+        <div class="palette-selector" id="paletteSelector"></div>
+        <div class="demo-card" id="demoCard"></div>
+    </div>
+
+    <div class="guide-section">
+        <h2>How to Apply the 60-30-10 Rule</h2>
+        <p>A practical guide to distributing your color palette across UI components for a cohesive, professional design.</p>
+
+        <div class="guide-rule-visual">
+            <div class="rule-dom">60% Dominant</div>
+            <div class="rule-sec">30% Secondary</div>
+            <div class="rule-acc">10% Accent</div>
+        </div>
+
+        <div class="guide-columns">
+            <div class="guide-card dom-card">
+                <div class="guide-card-header">
+                    <div class="guide-icon" style="background:rgba(71,85,105,0.3);color:#94a3b8">60%</div>
+                    <h3>Dominant Color</h3>
+                </div>
+                <ul>
+                    <li>Background / Surface colors</li>
+                    <li>Main content area</li>
+                    <li>Header & Footer backgrounds</li>
+                    <li>Card & container backgrounds</li>
+                    <li>Modal & overlay backdrops</li>
+                    <li>Body text (on light dominant)</li>
+                </ul>
+            </div>
+            <div class="guide-card sec-card">
+                <div class="guide-card-header">
+                    <div class="guide-icon" style="background:rgba(100,116,139,0.3);color:#cbd5e1">30%</div>
+                    <h3>Secondary Color</h3>
+                </div>
+                <ul>
+                    <li>Sidebar & navigation bars</li>
+                    <li>Input fields & form controls</li>
+                    <li>Card borders & dividers</li>
+                    <li>Secondary buttons</li>
+                    <li>Table row backgrounds</li>
+                    <li>Avatar & icon backgrounds</li>
+                </ul>
+            </div>
+            <div class="guide-card acc-card">
+                <div class="guide-card-header">
+                    <div class="guide-icon" style="background:rgba(249,115,22,0.15);color:#f97316">10%</div>
+                    <h3>Accent Color</h3>
+                </div>
+                <ul>
+                    <li>Primary action buttons</li>
+                    <li>Links & interactive states</li>
+                    <li>Notification badges & icons</li>
+                    <li>Active / selected states</li>
+                    <li>CTA banners & highlights</li>
+                    <li>Progress bars & sliders</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guide-component-map">
+            <h3>Component Mapping</h3>
+            <p>See how colors should be distributed across a typical web page layout</p>
+            <div class="mock-browser">
+                <div class="mock-topbar">
+                    <div class="mock-dots">
+                        <span style="background:#ff5f57"></span>
+                        <span style="background:#febc2e"></span>
+                        <span style="background:#28c840"></span>
+                    </div>
+                    <div class="mock-url">example.com</div>
+                </div>
+                <div class="mock-body" id="mockBody">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            <div class="guide-labels" id="mockLabels"></div>
+        </div>
+
+        <div class="guide-tips">
+            <div class="tip-card">
+                <div class="tip-icon">⚖️</div>
+                <div>
+                    <h4>Don't Break the Ratio</h4>
+                    <p>The 60-30-10 rule creates visual balance. If accent color overwhelms the secondary, reduce its usage or lighten its intensity.</p>
+                </div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">🔄</div>
+                <div>
+                    <h4>Context Matters</h4>
+                    <p>The rule applies to each screen / page, not the entire app. Dark mode may invert the roles of dominant and secondary.</p>
+                </div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">🎨</div>
+                <div>
+                    <h4>Use Shades & Tints</h4>
+                    <p>Create depth by using lighter or darker tints of your three base colors. They still count toward the same 60-30-10 bucket.</p>
+                </div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">♿</div>
+                <div>
+                    <h4>Check Contrast Ratios</h4>
+                    <p>Ensure text on dominant backgrounds meets WCAG AA (4.5:1 minimum). Use white text on dark, dark text on light.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copied-toast" id="toast">Copied!</div>
+
+    <script>
+        const palettes = [
+            {
+                name: "Ocean Breeze",
+                category: "light",
+                dominant: { hex: "#E8F0FE", rgb: "232,240,254" },
+                secondary: { hex: "#4A90D9", rgb: "74,144,217" },
+                accent: { hex: "#FF6B35", rgb: "255,107,53" }
+            },
+            {
+                name: "Forest Dawn",
+                category: "light",
+                dominant: { hex: "#F1F8E9", rgb: "241,248,233" },
+                secondary: { hex: "#2E7D32", rgb: "46,125,50" },
+                accent: { hex: "#FFAB40", rgb: "255,171,64" }
+            },
+            {
+                name: "Midnight Luxe",
+                category: "dark",
+                dominant: { hex: "#1A1A2E", rgb: "26,26,46" },
+                secondary: { hex: "#16213E", rgb: "22,33,62" },
+                accent: { hex: "#E94560", rgb: "233,69,96" }
+            },
+            {
+                name: "Sakura Bloom",
+                category: "light",
+                dominant: { hex: "#FFF0F3", rgb: "255,240,243" },
+                secondary: { hex: "#E8A0BF", rgb: "232,160,191" },
+                accent: { hex: "#7B2D8E", rgb: "123,45,142" }
+            },
+            {
+                name: "Desert Sand",
+                category: "warm",
+                dominant: { hex: "#F5E6D3", rgb: "245,230,211" },
+                secondary: { hex: "#C67C4E", rgb: "198,124,78" },
+                accent: { hex: "#2A9D8F", rgb: "42,157,143" }
+            },
+            {
+                name: "Neon Pulse",
+                category: "dark",
+                dominant: { hex: "#0D0D0D", rgb: "13,13,13" },
+                secondary: { hex: "#2D2D3F", rgb: "45,45,63" },
+                accent: { hex: "#00FF87", rgb: "0,255,135" }
+            },
+            {
+                name: "Lavender Mist",
+                category: "light",
+                dominant: { hex: "#F3EFFF", rgb: "243,239,255" },
+                secondary: { hex: "#9B8EC4", rgb: "155,142,196" },
+                accent: { hex: "#FF6E9C", rgb: "255,110,156" }
+            },
+            {
+                name: "Corporate Blue",
+                category: "light",
+                dominant: { hex: "#F0F4F8", rgb: "240,244,248" },
+                secondary: { hex: "#334E68", rgb: "51,78,104" },
+                accent: { hex: "#D63A3A", rgb: "214,58,58" }
+            },
+            {
+                name: "Autumn Harvest",
+                category: "warm",
+                dominant: { hex: "#FFF8E7", rgb: "255,248,231" },
+                secondary: { hex: "#B5651D", rgb: "181,101,29" },
+                accent: { hex: "#6B2737", rgb: "107,39,55" }
+            },
+            {
+                name: "Arctic Ice",
+                category: "light",
+                dominant: { hex: "#E8F4F8", rgb: "232,244,248" },
+                secondary: { hex: "#5DADE2", rgb: "93,173,226" },
+                accent: { hex: "#F39C12", rgb: "243,156,18" }
+            },
+            {
+                name: "Ruby Elegance",
+                category: "dark",
+                dominant: { hex: "#1C1C1C", rgb: "28,28,28" },
+                secondary: { hex: "#8B0000", rgb: "139,0,0" },
+                accent: { hex: "#FFD700", rgb: "255,215,0" }
+            },
+            {
+                name: "Mint Fresh",
+                category: "light",
+                dominant: { hex: "#F0FFF4", rgb: "240,255,244" },
+                secondary: { hex: "#38B2AC", rgb: "56,178,172" },
+                accent: { hex: "#DD6B20", rgb: "221,107,32" }
+            },
+            {
+                name: "Sunset Glow",
+                category: "warm",
+                dominant: { hex: "#FFF5EB", rgb: "255,245,235" },
+                secondary: { hex: "#E87461", rgb: "232,116,97" },
+                accent: { hex: "#2B6CB0", rgb: "43,108,176" }
+            },
+            {
+                name: "Charcoal Gold",
+                category: "dark",
+                dominant: { hex: "#2C2C2C", rgb: "44,44,44" },
+                secondary: { hex: "#555555", rgb: "85,85,85" },
+                accent: { hex: "#D4AF37", rgb: "212,175,55" }
+            },
+            {
+                name: "Tropical Lagoon",
+                category: "light",
+                dominant: { hex: "#E0F7FA", rgb: "224,247,250" },
+                secondary: { hex: "#0097A7", rgb: "0,151,167" },
+                accent: { hex: "#FF5722", rgb: "255,87,34" }
+            },
+            {
+                name: "Cyber Violet",
+                category: "dark",
+                dominant: { hex: "#120B1A", rgb: "18,11,26" },
+                secondary: { hex: "#4B1D52", rgb: "75,29,82" },
+                accent: { hex: "#A855F7", rgb: "168,85,247" }
+            },
+            {
+                name: "Peach Garden",
+                category: "warm",
+                dominant: { hex: "#FFF3E0", rgb: "255,243,224" },
+                secondary: { hex: "#E6A87C", rgb: "230,168,124" },
+                accent: { hex: "#7C4A2D", rgb: "124,74,45" }
+            },
+            {
+                name: "Nordic Frost",
+                category: "light",
+                dominant: { hex: "#EAF2F8", rgb: "234,242,248" },
+                secondary: { hex: "#85C1E9", rgb: "133,193,233" },
+                accent: { hex: "#1A5276", rgb: "26,82,118" }
+            },
+            {
+                name: "Emerald City",
+                category: "dark",
+                dominant: { hex: "#0B1F13", rgb: "11,31,19" },
+                secondary: { hex: "#1E6B3A", rgb: "30,107,58" },
+                accent: { hex: "#A8E6CF", rgb: "168,230,207" }
+            },
+            {
+                name: "Rose Gold",
+                category: "warm",
+                dominant: { hex: "#FDF2F8", rgb: "253,242,248" },
+                secondary: { hex: "#D4A0A7", rgb: "212,160,167" },
+                accent: { hex: "#B76E79", rgb: "183,110,121" }
+            },
+            {
+                name: "Slate & Copper",
+                category: "dark",
+                dominant: { hex: "#1E293B", rgb: "30,41,59" },
+                secondary: { hex: "#334155", rgb: "51,65,85" },
+                accent: { hex: "#F0A500", rgb: "240,165,0" }
+            },
+            {
+                name: "Ocean Teal",
+                category: "light",
+                dominant: { hex: "#F0FDFA", rgb: "240,253,250" },
+                secondary: { hex: "#14B8A6", rgb: "20,184,166" },
+                accent: { hex: "#7C3AED", rgb: "124,58,237" }
+            },
+            {
+                name: "Crimson Night",
+                category: "dark",
+                dominant: { hex: "#1A0A0A", rgb: "26,10,10" },
+                secondary: { hex: "#7F1D1D", rgb: "127,29,29" },
+                accent: { hex: "#FB923C", rgb: "251,146,60" }
+            },
+            {
+                name: "Buttercream",
+                category: "warm",
+                dominant: { hex: "#FFFEF5", rgb: "255,254,245" },
+                secondary: { hex: "#FDE047", rgb: "253,224,71" },
+                accent: { hex: "#EA580C", rgb: "234,88,12" }
+            },
+            {
+                name: "Electric Indigo",
+                category: "dark",
+                dominant: { hex: "#0F0F1A", rgb: "15,15,26" },
+                secondary: { hex: "#2E1065", rgb: "46,16,101" },
+                accent: { hex: "#38BDF8", rgb: "56,189,248" }
+            },
+            {
+                name: "Sage & Terracotta",
+                category: "warm",
+                dominant: { hex: "#F5F5DC", rgb: "245,245,220" },
+                secondary: { hex: "#87A878", rgb: "135,168,120" },
+                accent: { hex: "#E07A5F", rgb: "224,122,95" }
+            },
+            {
+                name: "Monochrome Silver",
+                category: "dark",
+                dominant: { hex: "#27272A", rgb: "39,39,42" },
+                secondary: { hex: "#3F3F46", rgb: "63,63,70" },
+                accent: { hex: "#22D3EE", rgb: "34,211,238" }
+            },
+            {
+                name: "Coral Reef",
+                category: "warm",
+                dominant: { hex: "#FFF0EC", rgb: "255,240,236" },
+                secondary: { hex: "#F97066", rgb: "249,112,102" },
+                accent: { hex: "#0F766E", rgb: "15,118,110" }
+            },
+            {
+                name: "Midnight Plum",
+                category: "dark",
+                dominant: { hex: "#14121F", rgb: "20,18,31" },
+                secondary: { hex: "#3B1C54", rgb: "59,28,84" },
+                accent: { hex: "#FBBF24", rgb: "251,191,36" }
+            },
+            {
+                name: "Citrus Zest",
+                category: "light",
+                dominant: { hex: "#FEFCE8", rgb: "254,252,232" },
+                secondary: { hex: "#FACC15", rgb: "250,204,21" },
+                accent: { hex: "#BE123C", rgb: "190,18,60" }
+            }
+        ];
+
+        // Generator state
+        let generatedPalettesList = [];
+        let currentHarmony = "all";
+        let addedNames = new Set();
+
+        function getContrastColor(hex) {
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+            const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+            return lum > 0.55 ? "#1a1a1a" : "#ffffff";
+        }
+
+        function hslToHex(h, s, l) {
+            s /= 100;
+            l /= 100;
+            const a = s * Math.min(l, 1 - l);
+            const f = (n) => {
+                const k = (n + h / 30) % 12;
+                const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+                return Math.round(255 * color).toString(16).padStart(2, '0');
+            };
+            return `#${f(0)}${f(8)}${f(4)}`;
+        }
+
+        function generateHarmonyColors(harmonyType) {
+            const baseHue = Math.random() * 360;
+            let hue1, hue2, hue3;
+            let isDark = Math.random() > 0.5;
+
+            if (!harmonyType || harmonyType === "all") {
+                const types = ["analogous", "complementary", "triadic", "split"];
+                harmonyType = types[Math.floor(Math.random() * types.length)];
+            }
+
+            switch (harmonyType) {
+                case "analogous":
+                    hue1 = baseHue;
+                    hue2 = (baseHue + 30) % 360;
+                    hue3 = (baseHue + 150) % 360;
+                    break;
+                case "complementary":
+                    hue1 = baseHue;
+                    hue2 = (baseHue + 180) % 360;
+                    hue3 = (baseHue + 30) % 360;
+                    break;
+                case "triadic":
+                    hue1 = baseHue;
+                    hue2 = (baseHue + 120) % 360;
+                    hue3 = (baseHue + 240) % 360;
+                    break;
+                case "split":
+                    hue1 = baseHue;
+                    hue2 = (baseHue + 150) % 360;
+                    hue3 = (baseHue + 210) % 360;
+                    break;
+                default:
+                    hue1 = baseHue;
+                    hue2 = (baseHue + 120) % 360;
+                    hue3 = (baseHue + 240) % 360;
+            }
+
+            // Dominant: light or very dark, low-medium saturation
+            const domL = isDark ? (8 + Math.random() * 8) : (90 + Math.random() * 7);
+            const domS = 10 + Math.random() * 25;
+            const dominantHex = hslToHex(hue1, domS, domL);
+
+            // Secondary: medium lightness, medium-high saturation
+            const secL = isDark ? (20 + Math.random() * 20) : (40 + Math.random() * 30);
+            const secS = 40 + Math.random() * 30;
+            const secondaryHex = hslToHex(hue2, secS, secL);
+
+            // Accent: high saturation, eye-catching
+            const accL = 50 + Math.random() * 20;
+            const accS = 70 + Math.random() * 25;
+            const accentHex = hslToHex(hue3, accS, accL);
+
+            return { dominantHex, secondaryHex, accentHex };
+        }
+
+        function generateRandomPalettes() {
+            const container = document.getElementById("generatedPalettes");
+            container.innerHTML = "";
+            generatedPalettesList = [];
+
+            for (let i = 0; i < 3; i++) {
+                const { dominantHex, secondaryHex, accentHex } = generateHarmonyColors(currentHarmony);
+                const genName = `Random ${generatedPalettesList.length + 1}`;
+                const palette = {
+                    name: genName,
+                    category: "generated",
+                    dominant: { hex: dominantHex },
+                    secondary: { hex: secondaryHex },
+                    accent: { hex: accentHex }
+                };
+
+                generatedPalettesList.push(palette);
+                addedNames.add(genName);
+
+                const el = document.createElement("div");
+                el.className = "generated-palette";
+                el.style.animationDelay = `${i * 0.1}s`;
+
+                const domC = getContrastColor(dominantHex);
+                const secC = getContrastColor(secondaryHex);
+                const accC = getContrastColor(accentHex);
+
+                el.innerHTML = `
+                    <div class="gen-preview">
+                        <div class="g-dom" style="background:${dominantHex};color:${domC}">60%</div>
+                        <div class="g-sec" style="background:${secondaryHex};color:${secC}">30%</div>
+                        <div class="g-acc" style="background:${accentHex};color:${accC}">10%</div>
+                    </div>
+                    <div class="gen-info">
+                        <div class="gen-hex-btn" onclick="copyHex('${dominantHex}')" style="cursor:pointer">
+                            <span class="role">Dom</span>
+                            ${dominantHex}
+                        </div>
+                        <div class="gen-hex-btn" onclick="copyHex('${secondaryHex}')" style="cursor:pointer">
+                            <span class="role">Sec</span>
+                            ${secondaryHex}
+                        </div>
+                        <div class="gen-hex-btn" onclick="copyHex('${accentHex}')" style="cursor:pointer">
+                            <span class="role">Acc</span>
+                            ${accentHex}
+                        </div>
+                        <button class="gen-add-btn" onclick="addToGrid(${i}, this)">+ Add to Grid</button>
+                    </div>
+                `;
+                container.appendChild(el);
+            }
+        }
+
+        function addToGrid(index, btnEl) {
+            const palette = generatedPalettesList[index];
+            const exists = palettes.find(p => p.name === palette.name);
+            if (exists) {
+                showToast("Already added!");
+                return;
+            }
+
+            const num = palettes.length + 1;
+            palette.name = `Random ${num}`;
+
+            palettes.push({
+                name: palette.name,
+                category: "generated",
+                dominant: palette.dominant,
+                secondary: palette.secondary,
+                accent: palette.accent
+            });
+
+            addedNames.add(palette.name);
+
+            btnEl.textContent = "✓ Added";
+            btnEl.classList.add("added");
+
+            renderPaletteGrid();
+            renderSelector();
+
+            showToast(`Added ${palette.name} to the grid!`);
+        }
+
+        function clearGenerated() {
+            const container = document.getElementById("generatedPalettes");
+            container.innerHTML = `
+                <div class="gen-empty">
+                    <span>🎨</span>
+                    Click "Generate" to create random color palettes
+                </div>
+            `;
+            generatedPalettesList = [];
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            toast.textContent = msg;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 1500);
+        }
+
+        function copyHex(hex) {
+            navigator.clipboard.writeText(hex).then(() => showToast(`Copied ${hex}`));
+        }
+
+        let currentFilter = "all";
+
+        function renderPaletteGrid() {
+            const grid = document.getElementById("paletteGrid");
+            grid.innerHTML = "";
+
+            let filtered = currentFilter === "all" ? palettes : palettes.filter(p => p.category === currentFilter);
+
+            filtered.forEach((p, idx) => {
+                const realIdx = palettes.indexOf(p);
+                const card = document.createElement("div");
+                card.className = "palette-card";
+                card.style.animationDelay = `${idx * 0.04}s`;
+                card.innerHTML = `
+                    <div class="palette-preview">
+                        <div class="color-section dominant" style="background:${p.dominant.hex};color:${getContrastColor(p.dominant.hex)}" onclick="copyHex('${p.dominant.hex}')">60%</div>
+                        <div class="color-section secondary" style="background:${p.secondary.hex};color:${getContrastColor(p.secondary.hex)}" onclick="copyHex('${p.secondary.hex}')">30%</div>
+                        <div class="color-section accent" style="background:${p.accent.hex};color:${getContrastColor(p.accent.hex)}" onclick="copyHex('${p.accent.hex}')">10%</div>
+                    </div>
+                    <div class="palette-info">
+                        <div class="palette-name"><span class="palette-number">${realIdx + 1}</span>${p.name}</div>
+                        <div class="color-details">
+                            <div class="color-row" onclick="copyHex('${p.dominant.hex}')">
+                                <div class="color-swatch" style="background:${p.dominant.hex}"></div>
+                                <div class="color-label"><div class="role">Dominant · 60%</div><div class="hex">${p.dominant.hex}</div></div>
+                            </div>
+                            <div class="color-row" onclick="copyHex('${p.secondary.hex}')">
+                                <div class="color-swatch" style="background:${p.secondary.hex}"></div>
+                                <div class="color-label"><div class="role">Secondary · 30%</div><div class="hex">${p.secondary.hex}</div></div>
+                            </div>
+                            <div class="color-row" onclick="copyHex('${p.accent.hex}')">
+                                <div class="color-swatch" style="background:${p.accent.hex}"></div>
+                                <div class="color-label"><div class="role">Accent · 10%</div><div class="hex">${p.accent.hex}</div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderFilterBar() {
+            const bar = document.getElementById("filterBar");
+            const cats = [
+                { key: "all", label: "All" },
+                { key: "light", label: "Light" },
+                { key: "dark", label: "Dark" },
+                { key: "warm", label: "Warm" },
+                { key: "generated", label: "Generated" }
+            ];
+            bar.innerHTML = "";
+            cats.forEach(c => {
+                const btn = document.createElement("button");
+                btn.className = "filter-btn" + (c.key === currentFilter ? " active" : "");
+                btn.textContent = c.label;
+                btn.onclick = () => {
+                    currentFilter = c.key;
+                    renderFilterBar();
+                    renderPaletteGrid();
+                };
+                bar.appendChild(btn);
+            });
+        }
+
+        function renderSelector() {
+            const sel = document.getElementById("paletteSelector");
+            sel.innerHTML = "";
+            palettes.forEach((p, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "palette-btn" + (idx === 0 ? " active" : "");
+                btn.style.background = `linear-gradient(135deg, ${p.dominant.hex} 60%, ${p.secondary.hex} 30%, ${p.accent.hex} 10%)`;
+                btn.onclick = () => {
+                    document.querySelectorAll(".palette-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    renderDemo(idx);
+                    renderMock(idx);
+                };
+                sel.appendChild(btn);
+            });
+        }
+
+        function renderDemo(idx) {
+            const p = palettes[idx];
+            const card = document.getElementById("demoCard");
+            card.style.background = p.dominant.hex;
+            card.style.color = getContrastColor(p.dominant.hex);
+
+            card.innerHTML = `
+                <div class="demo-header">
+                    <div class="demo-avatar" style="background:${p.secondary.hex};color:${getContrastColor(p.secondary.hex)}">✦</div>
+                    <div>
+                        <div class="demo-title">${p.name}</div>
+                        <div class="demo-subtitle">A beautifully crafted palette following the 60-30-10 rule</div>
+                    </div>
+                </div>
+                <div class="demo-bar-group">
+                    <div class="demo-bar" style="background:${p.secondary.hex};width:100%;height:12px"></div>
+                    <div class="demo-bar" style="background:${p.secondary.hex};width:72%;height:12px;opacity:0.7"></div>
+                    <div class="demo-bar" style="background:${p.secondary.hex};width:45%;height:12px;opacity:0.4"></div>
+                </div>
+                <div class="demo-text">
+                    The 60-30-10 rule is a timeless principle in design. Your dominant color covers the majority of the space, 
+                    the secondary color adds depth and interest, and the accent color provides that crucial pop of contrast that 
+                    draws the eye and creates visual impact.
+                </div>
+                <div class="demo-buttons">
+                    <button class="demo-btn demo-btn-primary" style="background:${p.accent.hex};color:${getContrastColor(p.accent.hex)}">Primary Action</button>
+                    <button class="demo-btn demo-btn-secondary" style="background:${p.secondary.hex};color:${getContrastColor(p.secondary.hex)}">Secondary</button>
+                </div>
+            `;
+        }
+
+        function renderMock(idx) {
+            const p = palettes[idx];
+            const dom = p.dominant.hex;
+            const sec = p.secondary.hex;
+            const acc = p.accent.hex;
+            const domC = getContrastColor(dom);
+            const secC = getContrastColor(sec);
+            const accC = getContrastColor(acc);
+
+            const mockBody = document.getElementById("mockBody");
+            mockBody.style.background = dom;
+
+            const textColor = domC === '#1a1a1a' ? '#1e293b' : '#e2e8f0';
+            const subtextColor = domC === '#1a1a1a' ? '#64748b' : '#94a3b8';
+
+            mockBody.innerHTML = `
+                <div class="mock-nav">
+                    <div class="mock-logo" style="color:${sec}">BRAND</div>
+                    <div class="mock-nav-links">
+                        <span class="mock-nav-link" style="color:${sec}">Home</span>
+                        <span class="mock-nav-link active-link" style="color:${acc}">Dashboard</span>
+                        <span class="mock-nav-link" style="color:${sec}">Settings</span>
+                    </div>
+                </div>
+                <div class="mock-hero">
+                    <h4 style="color:${textColor}">Welcome back!</h4>
+                    <p style="color:${subtextColor}">Your dashboard is ready to explore</p>
+                    <div class="mock-hero-btns">
+                        <div class="mock-btn" style="background:${acc};color:${accC}">Get Started</div>
+                        <div class="mock-btn" style="background:${sec};color:${secC}">Learn More</div>
+                    </div>
+                </div>
+                <div class="mock-cards">
+                    <div class="mock-mini-card" style="border-color:rgba(255,255,255,0.06)">
+                        <div class="mock-circle" style="background:${sec};opacity:0.4"></div>
+                        <div class="label" style="color:${subtextColor}">Revenue</div>
+                        <div class="value" style="color:${textColor}">$12,430</div>
+                        <div class="mock-bar-container" style="background:${sec};width:80%;opacity:0.3"></div>
+                    </div>
+                    <div class="mock-mini-card" style="border-color:rgba(255,255,255,0.06)">
+                        <div class="mock-circle" style="background:${acc};opacity:0.3"></div>
+                        <div class="label" style="color:${subtextColor}">Users</div>
+                        <div class="value" style="color:${textColor}">1,847</div>
+                        <div class="mock-bar-container" style="background:${acc};width:60%;opacity:0.4"></div>
+                    </div>
+                    <div class="mock-mini-card" style="border-color:rgba(255,255,255,0.06)">
+                        <div class="mock-circle" style="background:${sec};opacity:0.5"></div>
+                        <div class="label" style="color:${subtextColor}">Growth</div>
+                        <div class="value" style="color:${textColor}">+24%</div>
+                        <div class="mock-bar-container" style="background:${sec};width:90%;opacity:0.5"></div>
+                    </div>
+                </div>
+                <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+                    <span class="mock-tag" style="background:${sec};color:${secC}">Design</span>
+                    <span class="mock-tag" style="background:${sec};color:${secC}">Development</span>
+                    <span class="mock-tag" style="background:${acc};color:${accC}">Featured</span>
+                </div>
+            `;
+
+            const labels = document.getElementById("mockLabels");
+            labels.innerHTML = `
+                <div class="guide-label"><div class="guide-label-dot" style="background:${dom}"></div>Background (60%)</div>
+                <div class="guide-label"><div class="guide-label-dot" style="background:${sec}"></div>Navigation & Cards (30%)</div>
+                <div class="guide-label"><div class="guide-label-dot" style="background:${acc}"></div>Buttons & Active States (10%)</div>
+            `;
+        }
+
+        // Harmony selector
+        document.querySelectorAll('.harmony-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.harmony-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentHarmony = btn.dataset.harmony;
+            });
+        });
+
+        renderFilterBar();
+        renderPaletteGrid();
+        renderSelector();
+        renderDemo(0);
+        renderMock(0);
+    </script>
+</body>
+</html>
+
