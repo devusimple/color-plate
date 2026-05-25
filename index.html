@@ -2,8 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>30+ Color Palettes — 60-30-10 Rule</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0">
+    <title>30+ Color Palettes — 60-30-10 Rule for UI Design</title>
+    <meta name="description" content="Explore 30+ handcrafted color palettes following the 60-30-10 design rule. Generate harmonious palettes, preview UI demos, and copy hex codes for your next project.">
+    <meta name="keywords" content="color palettes, 60-30-10 rule, UI design, color scheme generator, web design, color harmony, design tool">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://colorplate.app">
+    <meta property="og:title" content="30+ Color Palettes — 60-30-10 Rule for UI Design">
+    <meta property="og:description" content="Explore 30+ handcrafted color palettes following the 60-30-10 design rule. Generate harmonious palettes, preview UI demos, and copy hex codes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://colorplate.app">
+    <meta property="og:image" content="https://colorplate.app/icon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="30+ Color Palettes — 60-30-10 Rule for UI Design">
+    <meta name="twitter:description" content="Explore 30+ handcrafted color palettes following the 60-30-10 design rule. Generate harmonious palettes, preview UI demos, and copy hex codes.">
+    <meta name="twitter:image" content="https://colorplate.app/icon.png">
+    <meta name="theme-color" content="#0f0f13">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icon-192.png">
     <link href="https://api.fontsource.org/v1/fonts/inter/css.css" rel="stylesheet">
     <style>
         * {
@@ -1025,6 +1041,22 @@
             }
         }
     </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Color Plate",
+        "description": "30+ handcrafted color palettes following the 60-30-10 design rule. Generate harmonious palettes, preview UI demos, and copy hex codes.",
+        "url": "https://colorplate.app",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
 </head>
 <body>
 
@@ -1777,6 +1809,51 @@
         renderSelector();
         renderDemo(0);
         renderMock(0);
+
+        // --- PWA ---
+        let deferredPrompt = null;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const btn = document.createElement('button');
+            btn.className = 'gen-btn gen-btn-primary';
+            btn.textContent = '📲 Install App';
+            btn.style.position = 'fixed';
+            btn.style.bottom = '24px';
+            btn.style.right = '24px';
+            btn.style.zIndex = '200';
+            btn.style.boxShadow = '0 8px 32px rgba(167,139,250,0.4)';
+            btn.style.animation = 'slideIn 0.5s ease forwards';
+            btn.id = 'installBtn';
+            btn.onclick = async () => {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                const result = await deferredPrompt.userChoice;
+                if (result.outcome === 'accepted') {
+                    btn.textContent = '✓ Installed';
+                    btn.disabled = true;
+                    btn.style.opacity = '0.5';
+                }
+                deferredPrompt = null;
+            };
+            document.body.appendChild(btn);
+        });
+
+        window.addEventListener('appinstalled', () => {
+            const btn = document.getElementById('installBtn');
+            if (btn) {
+                btn.textContent = '✓ Installed';
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+            }
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
     </script>
 </body>
 </html>
